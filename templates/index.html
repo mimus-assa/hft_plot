@@ -1,0 +1,17 @@
+
+<html>
+    <head>
+        <title>Select a file</title>
+    </head>
+    <body>
+        <h1>Select a file to plot</h1>
+        <form action="/plot" method="POST">
+            <select name="file">
+                {% for file in files %}
+                    <option value="{{ file }}">{{ file }}</option>
+                {% endfor %}
+            </select>
+            <input type="submit" value="Submit">
+        </form>
+    </body>
+  </html>

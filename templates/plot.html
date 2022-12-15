@@ -1,0 +1,40 @@
+
+<html>
+    <head>
+        <title>Interactive Plot</title>
+        <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    </head>
+    <body>
+        <h1>Select a file to plot</h1>
+        <form action="/plot" method="POST">
+            <select name="file">
+                {% for file in files %}
+                    <option value="{{ file }}">{{ file }}</option>
+                {% endfor %}
+            </select>
+            <input type="submit" value="Submit">
+        </form>
+        <div id="plotly"></div>
+        <script>
+            var data = {{ df|tojson }};
+            var trace = {
+                x: Object.values(data.datetime),
+                y: Object.values(data.delta),
+                type: 'scatter'
+            };
+            var layout = {
+                xaxis: {
+                    range: [0, 500]
+                },
+                margin: {
+                    l: 40,
+                    r: 40,
+                    b: 40,
+                    t: 40
+                },
+                dragmode: 'pan'
+            };
+            Plotly.newPlot('plotly', [trace], layout);
+        </script>
+    </body>
+  </html>
