@@ -1,4 +1,3 @@
-
 <html>
     <head>
         <title>Interactive Plot</title>
@@ -6,6 +5,7 @@
         <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     </head>
     <body>
+        <h2>File: {{ filename }}</h2>
         <h1>Select a file to plot</h1>
         <!-- This form is used to submit the file chosen by the user to the plot route -->
         <form action="/hft_plot" method="POST">

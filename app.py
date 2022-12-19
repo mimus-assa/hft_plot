@@ -19,7 +19,7 @@ def hft_plot():
     df = pd.read_csv('datas/' + filename)
     # Select only the columns of interest
     df = df[['datetime', 'delta']]
-    return render_template('hft_plot.html', df=df.to_dict(), files=files)
+    return render_template('hft_plot.html', df=df.to_dict(), files=files, filename=filename)
 
 @app.route('/savetimestamps', methods=['POST'])
 def save_timestamps():
