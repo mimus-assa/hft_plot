@@ -4,9 +4,6 @@ from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
-# get a list of the files in the 'datas' folder
-files = os.listdir('datas')
-
 # Retrieve the list of files in the datas folder
 files = os.listdir('datas')
 
@@ -15,14 +12,14 @@ def index():
     """Render the index.html template with the list of files"""
     return render_template('index.html', files=files)
 
-@app.route('/plot', methods=['POST'])
-def plot():
+@app.route('/hft_plot', methods=['POST'])
+def hft_plot():
     """Render the plot.html template with the data from the selected file"""
     filename = request.form['file']
     df = pd.read_csv('datas/' + filename)
     # Select only the columns of interest
     df = df[['datetime', 'delta']]
-    return render_template('plot.html', df=df.to_dict(), files=files)
+    return render_template('hft_plot.html', df=df.to_dict(), files=files)
 
 @app.route('/savetimestamps', methods=['POST'])
 def save_timestamps():
