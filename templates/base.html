@@ -1,0 +1,28 @@
+<html>
+  <head>
+    <title>{% block title %}{% endblock %}</title>
+    <!-- This script tag is used to include the plotly library -->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    {% block styles %}{% endblock %}
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="#">HFT Plot</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item active">
+            <a class="nav-link" href="/">Home</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    {% for message in get_flashed_messages() %}
+      <div class="alert alert-danger">{{ message }}</div>
+    {% endfor %}
+    {% block content %}{% endblock %}
+  </body>
+</html>
+
