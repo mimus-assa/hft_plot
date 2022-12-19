@@ -1,16 +1,18 @@
-
 <html>
     <head>
         <title>Select a file</title>
     </head>
     <body>
         <h1>Select a file to plot</h1>
+        <!-- This form is used to submit the file chosen by the user to the plot route -->
         <form action="/plot" method="POST">
             <select name="file">
                 {% for file in files %}
+                    <!-- This loop is used to populate the list with the available files -->
                     <option value="{{ file }}">{{ file }}</option>
                 {% endfor %}
             </select>
+            <!-- This button is used to submit the form -->
             <input type="submit" value="Submit">
         </form>
     </body>
