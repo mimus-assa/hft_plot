@@ -3,6 +3,8 @@
         <title>Interactive Plot</title>
         <!-- This script tag is used to include the plotly library -->
         <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+        <!-- This script tag is used to include the hft_ploty.js file -->
+        <script src="{{ url_for('static', filename='hft_ploty.js') }}"></script>
     </head>
     <body>
         <h1>Select a file to plot</h1>
@@ -27,60 +29,16 @@
         <script>
             // List to store the timestamps clicked on the plot
             var timestamps = [];
-            <!-- This script is used to create the plotly plot from the data -->
-            var data = {{ df|tojson }};
-            var trace = {
-                x: Object.values(data.datetime),
-                y: Object.values(data.delta),
-                type: 'scatter'
-            };
-            var layout = {
-                xaxis: {
-                    range: [0, 500]
-                },
-                margin: {
-                    l: 40,
-                    r: 40,
-                    b: 40,
-                    t: 40
-                },
-                dragmode: 'pan'
-            };
-            // Create the plotly plot
-            Plotly.newPlot('plotly', [trace], layout);
-            // Add a listener to detect when the user clicks on the plot
-            document.getElementById('plotly').on('plotly_click', function(data){
-                // Retrieve the x and y coordinates of the click
-                var x = data.points[0].x;
-                var y = data.points[0].y;
-                // Add the timestamp to the list
-                timestamps.push(x);
-                // Create a trace with a single point to highlight the clicked timestamp
-                var newTrace = {
-                    x: [x],
-                    y: [y],
-                    type: 'scatter',
-                    mode: 'markers',
-                    marker: {
-                        color: 'red'
-                    }
-                };
-                // Add the trace to the plot
-                Plotly.addTraces('plotly', newTrace);
-            });
-            // Function to send the timestamps to the server
+            <!-- This script is used to call the createPlot() function from hft_ploty.js -->
+            createPlot({{ df|tojson }});
             function saveTimestamps() {
-                // Retrieve the filename entered by the user
                 var filename = document.getElementById('filename').value;
-                // Create a new http request
                 var xhttp = new XMLHttpRequest();
-                // Add a listener to detect when the response from the server is received
                 xhttp.onreadystatechange = function() {
                     if (this.readyState == 4 && this.status == 200) {
                        alert("Data saved!");
                     }
                 };
-                // Send the request to the server
                 xhttp.open("POST", "/savetimestamps", true);
                 xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
                 xhttp.send("timestamps=" + JSON.stringify(timestamps) + "&filename=" + filename);
