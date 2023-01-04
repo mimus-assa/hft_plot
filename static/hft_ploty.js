@@ -3,7 +3,8 @@ function createPlot(data) {
     var trace = {
       x: Object.values(data.datetime),
       y: Object.values(data.delta),
-      type: 'scatter'
+      type: 'scatter',
+      name: data.delta // include the delta value in the trace name
     };
     var layout = {
       xaxis: {
@@ -29,7 +30,8 @@ function createPlot(data) {
         mode: 'markers',
         marker: {
           color: 'red'
-        }
+        },
+        name: y // include the y value (i.e., the delta value) in the trace name
       };
       Plotly.addTraces('plotly', newTrace);
     });

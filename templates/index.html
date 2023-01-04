@@ -4,7 +4,7 @@
     </head>
     <body>
         <h1>Select a file to plot</h1>
-        <!-- This form is used to submit the file chosen by the user to the plot route -->
+        <!-- This form is used to submit the file chosen by the user to the hft_plot route -->
         <form action="/hft_plot" method="POST">
             <select name="file">
                 {% for file in files %}
@@ -14,6 +14,17 @@
             </select>
             <!-- This button is used to submit the form -->
             <input type="submit" value="Submit">
+        </form>
+        <!-- This form is used to submit the file chosen by the user to the btc_trades_analysis route -->
+        <form action="/btc_trades_analysis" method="POST">
+            <select name="file">
+                {% for file in files %}
+                    <!-- This loop is used to populate the list with the available files -->
+                    <option value="{{ file }}">{{ file }}</option>
+                {% endfor %}
+            </select>
+            <!-- This button is used to submit the form -->
+            <input type="submit" value="BTC Trades Analysis">
         </form>
     </body>
 </html>

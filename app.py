@@ -14,6 +14,13 @@ def hft_plot():
     # Select only the columns of interest
     df = df[['datetime', 'delta']]
     return render_template('hft_plot.html', df=df.to_dict(), files=files, filename=filename)
+@app.route('/btc_trades_analysis', methods=['POST'])
+def btc_trades_analysis():
+    filename = request.form['file']
+    df = pd.read_csv('datas/' + filename)
+    # Select only the columns of interest
+    df = df[['datetime', 'close']]
+    return render_template('btc_trades_analysis.html', df=df.to_dict(), files=files, filename=filename)
 @app.route('/savetimestamps', methods=['POST'])
 def save_timestamps():
     timestamps = request.form['timestamps']

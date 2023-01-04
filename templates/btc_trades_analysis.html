@@ -1,0 +1,18 @@
+<html>
+    <head>
+        <title>BTC Trades Analysis</title>
+        <!-- This script tag is used to include the plotly library -->
+        <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+        <!-- This script tag is used to include the btc_trades_analysis.js file -->
+        <script src="{{ url_for('static', filename='btc_trades_analysis.js') }}"></script>
+    </head>
+    <body>
+        <h1>File: {{ filename }}</h1>
+        <!-- This div is used to contain the plotly plot -->
+        <div id="plotly"></div>
+        <script>
+            <!-- This script is used to call the createPlot() function from btc_trades_analysis.js -->
+            createPlot({{ df|tojson }});
+        </script>
+    </body>
+</html>
