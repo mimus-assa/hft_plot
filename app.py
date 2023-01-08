@@ -9,7 +9,7 @@ files = os.listdir('datas')
 def index():
     return render_template('index.html', files=files)
 
-@app.route('/hft_plot', methods=['POST'])
+@app.route('/hft_plot', methods=['POST','GET'])
 def hft_plot():
     filename = request.form['file']
     df = pd.read_csv('datas/' + filename)
@@ -17,13 +17,14 @@ def hft_plot():
     df = df[['datetime', 'delta']]
     return render_template('hft_plot.html', df=df.to_dict(), files=files, filename=filename)
 
-@app.route('/btc_trades_analysis', methods=['POST'])
+@app.route('/btc_trades_analysis', methods=['POST','GET'])
 def btc_trades_analysis():
     filename = request.form['file']
     df = pd.read_csv('datas/' + filename)
     # Select only the columns of interest
-    df = df[['datetime', 'close']]
+    df = df[['datetime', 'open', 'high', 'low', 'close']]
     return render_template('btc_trades_analysis.html', df=df.to_dict(), files=files, filename=filename)
+
 
 @app.route('/savetimestamps', methods=['POST'])
 def save_timestamps():
