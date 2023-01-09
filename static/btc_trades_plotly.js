@@ -1,3 +1,4 @@
+
 // This function is used to create the plotly plot from the data
 function createPlot(data) {
   var openData = Object.values(data.open);
@@ -36,6 +37,22 @@ function createPlot(data) {
     mode: 'lines'
   };
 
+  // Add a menu to choose between red and green colors
+  var colorMenu = document.createElement('select');
+  colorMenu.id = 'color-menu';
+
+  var redOption = document.createElement('option');
+  redOption.value = 'red';
+  redOption.innerText = 'Red';
+  colorMenu.appendChild(redOption);
+
+  var greenOption = document.createElement('option');
+  greenOption.value = 'green';
+  greenOption.innerText = 'Green';
+  colorMenu.appendChild(greenOption);
+
+  document.body.appendChild(colorMenu);
+
   // Combine the traces into a single data array
   var data = [openTrace, highTrace, lowTrace, closeTrace];
 
@@ -59,13 +76,17 @@ function createPlot(data) {
     var x = data.points[0].x;
     var y = data.points[0].y;
     timestamps.push(x);
+
+    // Get the selected color from the menu
+    var color = document.getElementById('color-menu').value;
+
     var newTrace = {
       x: [x],
       y: [y],
       type: 'scatter',
       mode: 'markers',
       marker: {
-        color: 'red'
+        color: color
       },
       name: y // include the y value (i.e., the delta value) in the trace name
     };
