@@ -1,4 +1,3 @@
-
 // This function is used to create the plotly plot from the data
 function createPlot(data) {
   var openData = Object.values(data.open);
