@@ -55,19 +55,23 @@ function createPlot(data) {
 
   // Create the plot
   Plotly.newPlot('plotly', data, layout);
-
-  // Add the event listener for clicking on the plot
-  document.getElementById('plotly').on('plotly_click', function(data) {
-    // Get the coordinates of the click event
+  document.getElementById('plotly').on('plotly_click', function(data){
     var x = data.points[0].x;
     var y = data.points[0].y;
-
-    // Add a dot at the click location
-    Plotly.addTraces('plotly', {
+    timestamps.push(x);
+    var newTrace = {
       x: [x],
       y: [y],
       type: 'scatter',
-      mode: 'markers'
-    });
+      mode: 'markers',
+      marker: {
+        color: 'red'
+      },
+      name: y // include the y value (i.e., the delta value) in the trace name
+    };
+    Plotly.addTraces('plotly', newTrace);
+  });
+  document.getElementById('plotly').on('plotly_legenddoubleclick', function(data){
+    Plotly.deleteTraces('plotly', [data.curveNumber]);
   });
 }
