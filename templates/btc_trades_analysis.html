@@ -29,9 +29,11 @@
         <script>
             // List to store the timestamps clicked on the plot
             var timestamps = [];
+            
             <!-- This script is used to call the createPlot() function from hft_ploty.js -->
             createPlot({{ df|tojson }});
             function saveTimestamps() {
+                console.log(timestamps)
                 var filename = document.getElementById('filename').value;
                 var xhttp = new XMLHttpRequest();
                 xhttp.onreadystatechange = function() {
@@ -41,7 +43,7 @@
                 };
                 xhttp.open("POST", "/savetimestamps", true);
                 xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-                xhttp.send("timestamps=" + JSON.stringify(timestamps) + "&filename=" + filename);
+                xhttp.send("timestamps=" + JSON.stringify(timestamps)  + "&filename=" +  filename);
             }
         </script>
     </body>

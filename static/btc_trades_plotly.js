@@ -74,7 +74,7 @@ function createPlot(data) {
   document.getElementById('plotly').on('plotly_click', function(data){
     var x = data.points[0].x;
     var y = data.points[0].y;
-    timestamps.push(x);
+    
 
     // Get the selected color from the menu
     var color = document.getElementById('color-menu').value;
@@ -89,6 +89,7 @@ function createPlot(data) {
       },
       name: y // include the y value (i.e., the delta value) in the trace name
     };
+    timestamps.push(newTrace);
     Plotly.addTraces('plotly', newTrace);
   });
   document.getElementById('plotly').on('plotly_legenddoubleclick', function(data){
