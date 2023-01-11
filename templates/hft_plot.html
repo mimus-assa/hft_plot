@@ -39,7 +39,7 @@
                        alert("Data saved!");
                     }
                 };
-                xhttp.open("POST", "/savetimestamps", true);
+                xhttp.open("POST", "/savetimestamps2", true);
                 xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
                 xhttp.send("timestamps=" + JSON.stringify(timestamps) + "&filename=" + filename);
             }
