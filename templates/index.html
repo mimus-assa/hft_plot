@@ -7,7 +7,7 @@
         <!-- This form is used to submit the file chosen by the user to the hft_plot route -->
         <form action="/hft_plot" method="POST">
             <select name="file">
-                {% for file in files %}
+                {% for file in files1 %}
                     <!-- This loop is used to populate the list with the available files -->
                     <option value="{{ file }}">{{ file }}</option>
                 {% endfor %}
@@ -18,7 +18,7 @@
         <!-- This form is used to submit the file chosen by the user to the btc_trades_analysis route -->
         <form action="/btc_trades_analysis" method="POST">
             <select name="file">
-                {% for file in files %}
+                {% for file in files2 %}
                     <!-- This loop is used to populate the list with the available files -->
                     <option value="{{ file }}">{{ file }}</option>
                 {% endfor %}
